@@ -140,12 +140,12 @@ class Mahasiswa extends REST_Controller
             if ($this->Mahasiswa_model->update_mahasiswa($data, $id) > 0) {
                 $this->response([
                     'status' => true,
-                    'message' => 'Mahasiswa berhasil diubah',
+                    'message' => 'Mahasiswa berhasil update',
                 ], REST_CONTROLLER::HTTP_OK);
             } else {
                 $this->response([
                     'status' => false,
-                    'message' => 'Gagal mengubah mahasiswa',
+                    'message' => 'Gagal update mahasiswa',
                 ], REST_CONTROLLER::HTTP_BAD_REQUEST);
             }
         } catch (\Throwable $e) {
