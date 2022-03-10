@@ -133,7 +133,7 @@ class Mahasiswa extends REST_Controller
             if ($id === null) {
                 $this->response([
                     'status' => false,
-                    'message' => 'Provide an ID',
+                    'message' => 'Tolong sediakan ID',
                 ], REST_CONTROLLER::HTTP_BAD_REQUEST);
             }
 
