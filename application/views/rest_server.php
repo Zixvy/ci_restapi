@@ -1,5 +1,5 @@
 <?php
-    defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
 <!DOCTYPE html>
@@ -96,8 +96,8 @@
         </p>
 
         <ol>
-            <li><a href="<?php echo site_url('api/example/users'); ?>">Users</a> - defaulting to JSON</li>
-            <li><a href="<?php echo site_url('api/example/users/format/csv'); ?>">Users</a> - get it in CSV</li>
+            <li><a href="<?php echo site_url('api/mahasiswa/?X-API-KEY=restapi-key'); ?>">GET REQUEST Mahasiswa</a> - defaulting to JSON</li>
+            <li><a href="<?php echo site_url('api/mahasiswa/?X-API-KEY=restapi-key&id=1'); ?>">GET REQUEST Mahasiswa with ID 1</a> - JSON</li>
             <li><a href="<?php echo site_url('api/example/users/id/1'); ?>">User #1</a> - defaulting to JSON  (users/id/1)</li>
             <li><a href="<?php echo site_url('api/example/users/1'); ?>">User #1</a> - defaulting to JSON  (users/1)</li>
             <li><a href="<?php echo site_url('api/example/users/id/1.xml'); ?>">User #1</a> - get it in XML (users/id/1.xml)</li>
@@ -112,7 +112,7 @@
 
     </div>
 
-    <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>'.CI_VERSION.'</strong>' : '' ?></p>
+    <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-1.12.0.js"></script>

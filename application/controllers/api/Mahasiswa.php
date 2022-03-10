@@ -40,16 +40,9 @@ class Mahasiswa extends REST_Controller
             ], REST_CONTROLLER::HTTP_OK);
         }
 
-        if ($mahasiswa === null) {
-            $this->response([
-                'status' => false,
-                'message' => 'Mahasiswa not found',
-            ], REST_CONTROLLER::HTTP_NOT_FOUND);
-        }
-
         $this->response([
             'status' => false,
-            'message' => 'User not found',
+            'message' => 'Mahasiswa tidak ditemukan',
         ], REST_CONTROLLER::HTTP_NOT_FOUND);
     }
 
@@ -60,19 +53,19 @@ class Mahasiswa extends REST_Controller
         if ($id === null) {
             $this->response([
                 'status' => false,
-                'message' => 'Provide an ID',
+                'message' => 'Tolong sediakan ID',
             ], REST_CONTROLLER::HTTP_BAD_REQUEST);
         } else {
             if ($this->Mahasiswa_model->delete_mahasiswa($id) > 0) {
                 $this->response([
                     'status' => false,
                     'id' => $id,
-                    'message' => 'Deleted',
+                    'message' => 'Data Terhapus',
                 ], REST_CONTROLLER::HTTP_OK);
             } else {
                 $this->response([
                     'status' => false,
-                    'message' => 'ID not found',
+                    'message' => 'ID tidak ditemukan',
                 ], REST_CONTROLLER::HTTP_BAD_REQUEST);
             }
         }
@@ -100,12 +93,12 @@ class Mahasiswa extends REST_Controller
             if ($this->Mahasiswa_model->create_mahasiswa($data) > 0) {
                 $this->response([
                     'status' => true,
-                    'message' => 'Mahasiswa succesfully created',
+                    'message' => 'Mahasiswa berhasil ditambahkan',
                 ], REST_CONTROLLER::HTTP_CREATED);
             } else {
                 $this->response([
                     'status' => false,
-                    'message' => 'failed to create data',
+                    'message' => 'Gagal menambahkan mahasiswa',
                 ], REST_CONTROLLER::HTTP_BAD_REQUEST);
             }
         } catch (\Throwable $e) {
@@ -147,12 +140,12 @@ class Mahasiswa extends REST_Controller
             if ($this->Mahasiswa_model->update_mahasiswa($data, $id) > 0) {
                 $this->response([
                     'status' => true,
-                    'message' => 'Mahasiswa succesfully updated',
+                    'message' => 'Mahasiswa berhasil diubah',
                 ], REST_CONTROLLER::HTTP_OK);
             } else {
                 $this->response([
                     'status' => false,
-                    'message' => 'Failed to update data',
+                    'message' => 'Gagal mengubah mahasiswa',
                 ], REST_CONTROLLER::HTTP_BAD_REQUEST);
             }
         } catch (\Throwable $e) {

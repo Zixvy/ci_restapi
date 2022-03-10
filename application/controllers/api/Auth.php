@@ -73,19 +73,55 @@ class Auth extends REST_Controller
                     $this->response([
                         'status' => true,
                         'token' => $output['token'],
-                        'message' => 'Login success',
+                        'message' => 'Login berhasil',
                         'data' => $user,
                     ], REST_CONTROLLER::HTTP_OK);
                 } else {
                     $this->response([
                         'status' => false,
-                        'message' => 'Wrong password',
+                        'message' => 'Password salah',
                     ], REST_CONTROLLER::HTTP_BAD_REQUEST);
                 }
             } else {
                 $this->response([
                     'status' => false,
-                    'message' => 'Username not found in database',
+                    'message' => 'Username tidak di temukan',
+                ], REST_CONTROLLER::HTTP_BAD_REQUEST);
+            }
+        } catch (\Throwable $e) {
+            $this->response([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], REST_CONTROLLER::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function register_post()
+    {
+        try {
+            $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+            $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[users.username]|min_length[5]', ['is_unique' => 'Username already exists']);
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+
+            if (!$this->form_validation->run()) {
+                throw new Exception(validation_errors());
+            }
+
+            $data = [
+                'nama' => $this->post('nama'),
+                'username' => $this->post('username'),
+                'password' => password_hash($this->post('password'), PASSWORD_BCRYPT),
+            ];
+
+            if ($this->User_model->register_user($data) > 0) {
+                $this->response([
+                    'status' => true,
+                    'message' => 'User berhasil di register',
+                ], REST_CONTROLLER::HTTP_CREATED);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'User gagal di register',
                 ], REST_CONTROLLER::HTTP_BAD_REQUEST);
             }
         } catch (\Throwable $e) {
